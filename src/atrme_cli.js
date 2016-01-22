@@ -71,10 +71,10 @@ TerminalShell.filters.push(function (terminal, cmd) {
 
 TerminalShell.commands['shutdown'] = TerminalShell.commands['poweroff'] = function(terminal) {
 	if (this.sudo) {
-		terminal.print('Broadcast message from guest@atr.me');
+		terminal.print('Broadcast message from guest@kiritoalex.xyz');
 		terminal.print();
 		terminal.print('The system is going down for maintenance NOW!');
-		terminal.print('El Psy Congroo!');
+		terminal.print('See you soon!');
 		return $('#screen').fadeOut();
 	} else {
 		terminal.print('Must be root.');
@@ -84,7 +84,7 @@ TerminalShell.commands['shutdown'] = TerminalShell.commands['poweroff'] = functi
 TerminalShell.commands['logout'] =
 TerminalShell.commands['exit'] = 
 TerminalShell.commands['quit'] = function(terminal) {
-	terminal.print('El Psy Congroo!');
+	terminal.print('See you soon!');
 	$('#prompt, #cursor').hide();
 	terminal.promptActive = false;
 };
@@ -108,7 +108,7 @@ function linkFile(url) {
 Filesystem = {
 	'welcome.txt': {type:'file', read:function(terminal) {
 		terminal.print();
-		terminal.print($('<h4>').text('~Welcome to the atr.me command line entrance~'));
+		terminal.print($('<h4>').text('~Welcome to the kiritoalex.xyz command line entrance~'));
 		terminal.print('Use "ls", "cat", and "cd" to navigate the filesystem.');
 		terminal.print('If confused, type "help" for assistance.');
 		terminal.print();
@@ -118,8 +118,8 @@ Filesystem = {
 		terminal.print($('<h4>').text('ABOUT THE SITE'));
 		terminal.print();
 		$.each([
-			'This is the homepage, and also the command line entrance of atr.me.',
-			'Atr.me is the personal website of mine, here you can find the way',
+			'This is the homepage, and also the command line entrance of kiritoalex.xyz.',
+			'Kiritoalex.xyz is the personal website of mine, here you can find the way',
 			'to my two blogs, the zh_CN one and the en_US one. For more about me,',
 			'you can check the \"AboutMe\" directory or the blogs.',
 			'',
@@ -130,10 +130,9 @@ Filesystem = {
 		});
 	}}
 };
-Filesystem['blog-cn'] = linkFile('http://blog.atr.me/');
-Filesystem['blog-en'] = linkFile('http://iblog.atr.me/');
-Filesystem['wiki'] = linkFile('http://wiki.atr.me/');
-Filesystem['AboutMe'] = linkFile('http://about.me/AstroProfundis');
+Filesystem['blog'] = linkFile('http://blog.kiritoalex.xyz/');
+Filesystem['CV'] = linkFile('https://blog.kiritoalex.xyz/?page_id=42');
+Filesystem['AboutMe'] = linkFile('https://blog.kiritoalex.xyz/?page_id=44');
 TerminalShell.pwd = Filesystem;
 
 TerminalShell.commands['cd'] = function(terminal, path) {
@@ -208,36 +207,24 @@ TerminalShell.commands['rm'] = function(terminal, flags, path) {
 };
 
 TerminalShell.commands['wget'] = TerminalShell.commands['curl'] = function(terminal, dest) {
-	if (dest == "blog" || dest == "blog-cn") {
+	if (dest == "blog" || dest == "blog") {
 		terminal.setWorking(true);
 		var browser = $('<div>')
 			.addClass('browser')
 			.append($('<iframe>')
-					.prop('src', "http://blog.atr.me").width("100%").height(600)
+					.prop('src', "http://blog.kiritoalex.xyz").width("100%").height(600)
 					.one('load', function() {
 						terminal.setWorking(false);
 					}));
 		terminal.print(browser);
 		terminal.print("If returned a 404 error, please add http://, https:// or ftp:// at start of the URL.");
 		return browser;
-	} else if (dest == "blog-en" || dest == 'iblog') {
+	} else if (dest == "CV") {
 		terminal.setWorking(true);
 		var browser = $('<div>')
 			.addClass('browser')
 			.append($('<iframe>')
-					.prop('src', "http://iblog.atr.me").width("100%").height(600)
-					.one('load', function() {
-						terminal.setWorking(false);
-					}));
-		terminal.print(browser);
-		terminal.print("If returned a 404 error, please add http://, https:// or ftp:// at start of the URL.");
-		return browser;
-	} else if (dest == "wiki") {
-		terminal.setWorking(true);
-		var browser = $('<div>')
-			.addClass('browser')
-			.append($('<iframe>')
-					.prop('src', "http://wiki.atr.me").width("100%").height(600)
+					.prop('src', "https://blog.kiritoalex.xyz/?page_id=42").width("100%").height(600)
 					.one('load', function() {
 						terminal.setWorking(false);
 					}));
@@ -249,7 +236,7 @@ TerminalShell.commands['wget'] = TerminalShell.commands['curl'] = function(termi
 		var browser = $('<div>')
 			.addClass('browser')
 			.append($('<iframe>')
-					.prop('src', "http://about.me/AstroProfundis").width("100%").height(600)
+					.prop('src', "https://blog.kiritoalex.xyz/?page_id=44").width("100%").height(600)
 					.one('load', function() {
 						terminal.setWorking(false);
 					}));
